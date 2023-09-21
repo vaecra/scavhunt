@@ -4,16 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scavenger Hunt</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .inputBox {
+            position: absolute;
+            display: none; /* Initially hide all boxes */
+        }
+        /* Positioning each box */
+        #box1 { top: 10%; left: 10%; display: block; } /* Only the first box is visible initially */
+        #box2 { top: 10%; left: 50%; }
+        #box3 { top: 10%; right: 10%; }
+        #box4 { top: 50%; left: 10%; }
+        #box5 { top: 50%; left: 50%; }
+        #box6 { top: 50%; right: 10%; }
+        #box7 { bottom: 10%; left: 10%; }
+        #box8 { bottom: 10%; left: 50%; }
+        #box9 { bottom: 10%; right: 10%; }
+    </style>
 </head>
 <body>
-    <input type="text" id="inputBox" placeholder="Enter the clue...">
-    <button onclick="redirectToWebsite()">Submit</button>
+    <div class="inputBox" id="box1">
+        <p>he is mean and green</p>
+        <input type="text" placeholder="Enter the clue...">
+        <button onclick="checkPassword('Rex', 'box2')">Submit</button>
+    </div>
+    <!-- You can add similar divs for other boxes and customize the passwords and clues -->
+    <div class="inputBox" id="box2">
+        <input type="text" placeholder="Enter the clue...">
+        <button onclick="checkPassword('password2', 'box3')">Submit</button>
+    </div>
+    <!-- ... Repeat for boxes 3 to 9, updating the passwords and next box IDs -->
 
     <script>
-        function redirectToWebsite() {
-            let inputVal = document.getElementById('inputBox').value;
-            if (inputVal === "yourSecretCode") { // Replace 'yourSecretCode' with whatever code or answer you want her to type.
-                window.location.href = "https://www.example.com"; // Replace with the link to the next clue or website.
+        function checkPassword(expectedPassword, nextBoxId) {
+            let currentBox = event.target.parentElement;
+            let inputVal = currentBox.querySelector('input').value;
+            if (inputVal === expectedPassword) {
+                document.getElementById(nextBoxId).style.display = 'block';
             } else {
                 alert("Try again!");
             }
